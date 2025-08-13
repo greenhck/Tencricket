@@ -1,0 +1,11 @@
+यह आपकी menu.json फ़ाइल का कंटेंट है। इस टेक्स्ट को कॉपी करें और इसे menu.json नाम की फ़ाइल में सेव करें, उसी फ़ोल्डर में जहाँ आप index.html को सेव कर रहे हैं।[
+  { "id": "burger", "name": "बर्गर", "price": 50, "imageUrl": "https://placehold.co/400x200/FDD835/121212?text=Burger" },
+  { "id": "pizza", "name": "पिज्जा", "price": 120, "imageUrl": "https://placehold.co/400x200/C62828/FFFFFF?text=Pizza" },
+  { "id": "chocolate-cake", "name": "चॉकलेट केक (1kg)", "price": 400, "imageUrl": "https://placehold.co/400x200/FDD835/121212?text=Chocolate+Cake" },
+  { "id": "sandwich", "name": "सैंडविच", "price": 60, "imageUrl": "https://placehold.co/400x200/C62828/FFFFFF?text=Sandwich" },
+  { "id": "french-fries", "name": "फ्रेंच फ्राइज़", "price": 80, "imageUrl": "https://placehold.co/400x200/FDD835/121212?text=French+Fries" },
+  { "id": "cold-coffee", "name": "कोल्ड कॉफ़ी", "price": 90, "imageUrl": "https://placehold.co/400x200/C62828/FFFFFF?text=Cold+Coffee" },
+  { "id": "veg-roll", "name": "वेज रोल", "price": 70, "imageUrl": "https://placehold.co/400x200/FDD835/121212?text=Veg+Roll" },
+  { "id": "chicken-nuggets", "name": "चिकन नगेट्स (6 पीस)", "price": 150, "imageUrl": "https://placehold.co/400x200/C62828/FFFFFF?text=Chicken+Nuggets" }
+  <!-- यहाँ और मेनू आइटम जोड़ें -->
+]
