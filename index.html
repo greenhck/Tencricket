@@ -3,82 +3,727 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayMax</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+    <title>Brother's Fast Food & Cake Bakery</title>
+    <!-- Google Fonts for Poppins (general text) and Bebas Neue (headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-yellow: #fdd835; /* Bright yellow for accents */
+            --secondary-red: #c62828; /* Deep red for highlights */
+            --dark-black: #1a1a1a; /* Base dark color */
+            --off-black: #0d0d0d; /* Slightly lighter black for sections */
+            --light-grey: #e0e0e0; /* Light grey for text */
+            --white: #ffffff;
+            --whatsapp-green: #25D366;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--dark-black);
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%232e2e2e" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zm0-30V0H4v4H0v2h4v4h2V6H4V4z"%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); /* Subtle pattern background */
+            color: var(--light-grey);
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #000, var(--dark-black));
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Ensure header stays on top */
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.8rem; /* Slightly larger */
+            color: var(--primary-yellow);
+            margin: 0;
+            letter-spacing: 4px; /* More spacing */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Deeper shadow */
+            animation: bounceIn 1s ease-out forwards; /* Simple intro animation */
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 20px; /* More padding */
+            background-color: transparent; /* Background handled by body pattern */
+        }
+
+        .cta-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.2rem; /* Larger */
+            color: var(--white);
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .cta-section p {
+            font-size: 1.3rem; /* Larger */
+            color: var(--primary-yellow);
+            margin-bottom: 40px; /* More spacing */
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-red);
+            color: var(--white);
+            padding: 18px 50px; /* Larger button */
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.5rem; /* Larger font */
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+            border: 2px solid var(--secondary-red); /* Border for emphasis */
+        }
+
+        .cta-button:hover {
+            background-color: #e53935;
+            transform: translateY(-5px) scale(1.02); /* More pronounced effect */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary-yellow); /* Yellow border on hover */
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--off-black); /* Slightly different black */
+            box-shadow: inset 0 8px 15px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+        }
+
+        .menu-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem; /* Larger */
+            color: var(--primary-yellow);
+            margin-bottom: 60px; /* More spacing */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        #menu-loading-message {
+            font-size: 1.5rem;
+            color: var(--light-grey);
+            margin-top: 20px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Larger minimum size */
+            gap: 50px; /* More gap */
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            background-color: #2e2e2e; /* Darker item background */
+            padding: 30px; /* More padding */
+            border-radius: 15px; /* More rounded */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #444; /* Subtle border */
+        }
+
+        .menu-item:hover {
+            transform: translateY(-12px) scale(1.03); /* More pronounced effect */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border-color: var(--primary-yellow); /* Yellow border on hover */
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 220px; /* Slightly larger image */
+            object-fit: cover;
+            border-radius: 10px; /* More rounded */
+            margin-bottom: 25px;
+            border: 4px solid var(--primary-yellow); /* Thicker border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-item h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem; /* Larger */
+            color: var(--white);
+            margin: 0 0 12px 0;
+            letter-spacing: 1.5px;
+        }
+
+        .menu-item .price {
+            font-weight: 700;
+            color: var(--primary-yellow);
+            font-size: 1.6rem; /* Larger */
+            margin-bottom: 25px;
+        }
+
+        .add-to-cart-button {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 15px 30px; /* Larger padding */
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2rem; /* Larger font */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #20b05b;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Order Summary Section */
+        .order-summary-section {
+            padding: 80px 20px;
+            background-color: var(--dark-black);
+            text-align: center;
+        }
+
+        .order-summary-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            max-width: 650px; /* Slightly wider */
+            margin: 0 auto 30px auto;
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid #444;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 25px; /* More padding */
+            border-bottom: 1px solid #3a3a3a; /* Darker border */
+            font-size: 1.2rem; /* Larger font */
+        }
+
+        #cart-items li:last-child {
+            border-bottom: none;
+        }
+
+        #cart-items li span {
+            flex: 1;
+            text-align: left;
+            color: var(--light-grey);
+        }
+
+        #cart-items li .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        #cart-items li .quantity-controls button {
+            background-color: var(--secondary-red);
+            color: white;
+            border: none;
+            padding: 8px 15px; /* Larger buttons */
+            margin: 0 8px; /* More margin */
+            border-radius: 8px; /* More rounded */
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.2s, transform 0.1s ease;
+        }
+
+        #cart-items li .quantity-controls button:hover {
+            background-color: #e53935;
+            transform: scale(1.05);
+        }
+
+        #cart-items li .item-total {
+            min-width: 90px; /* Ensure price column aligns */
+            text-align: right;
+            color: var(--primary-yellow);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        #cart-total-container {
+            font-size: 1.6rem; /* Larger total font */
+            font-weight: bold;
+            margin-top: 20px;
+            color: var(--primary-yellow);
+            padding: 20px 0; /* More padding */
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            max-width: 650px;
+            margin: 0 auto 50px auto; /* More margin */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        #free-delivery-message {
+            font-size: 1.1rem; /* Slightly larger */
+            color: var(--whatsapp-green);
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .customer-details-form {
+            max-width: 550px; /* Slightly wider */
+            margin: auto;
+            background-color: #2e2e2e;
+            padding: 40px; /* More padding */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+
+        .customer-details-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-align: left;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .customer-details-form input[type="text"] {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px; /* More padding */
+            margin-bottom: 25px;
+            border: 1px solid #555;
+            border-radius: 8px; /* More rounded */
+            background-color: #3a3a3a; /* Darker input background */
+            color: var(--white);
+            font-size: 1.1rem;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .customer-details-form input[type="text"]::placeholder {
+            color: #aaa;
+        }
+
+        .order-whatsapp-button {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 18px 35px; /* Larger button */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.3rem; /* Larger font */
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            margin-top: 25px;
+            border: 2px solid var(--whatsapp-green);
+        }
+
+        .order-whatsapp-button:hover {
+            background-color: #20b05b;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary-yellow); /* Yellow border on hover */
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--off-black);
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .contact-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        .contact-details p {
+            margin: 12px 0;
+            font-size: 1.2rem; /* Larger font */
+            color: var(--light-grey);
+        }
+
+        .contact-details a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 35px 20px; /* More padding */
+            background-color: #000;
+            border-top: 1px solid #333;
+            font-size: 1rem; /* Slightly larger */
+            color: #888;
+        }
+
+        /* Responsive Design (Media Queries) */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+                letter-spacing: 2px;
+            }
+            .cta-section h2, .menu-section h2, .order-summary-section h2, .contact-section h2 {
+                font-size: 2.5rem;
+            }
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 1.2rem;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+            }
+            .menu-item img {
+                height: 180px;
+            }
+            .menu-item h3 {
+                font-size: 1.7rem;
+            }
+            .menu-item .price {
+                font-size: 1.3rem;
+            }
+            #cart-items li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 20px;
+                font-size: 1.1rem;
+            }
+            #cart-items li span, #cart-items li .item-total {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 8px;
+            }
+            #cart-items li .quantity-controls {
+                justify-content: flex-end;
+                width: 100%;
+            }
+            .customer-details-form input[type="text"] {
+                width: calc(100% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+                letter-spacing: 1px;
+            }
+            .cta-section h2, .menu-section h2, .order-summary-section h2, .contact-section h2 {
+                font-size: 2rem;
+            }
+            .cta-section p {
+                font-size: 1.1rem;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .menu-item img {
+                height: 200px;
+            }
+            .order-whatsapp-button {
+                font-size: 1.1rem;
+                padding: 15px 25px;
+            }
+            #cart-total-container, .customer-details-form {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <img src="https://raw.githubusercontent.com/greenhck/PlayMax/refs/heads/main/playmax-removebg-preview.png" alt="Logo" class="logo">
-        <input type="text" placeholder="Search..." class="search-input">
+        <div class="container">
+            <h1>Brother's Fast Food & Cake Bakery</h1>
+        </div>
     </header>
 
-    <!-- Home Page (Only this page will show the video player) -->
-    <main id="home" class="page">
-        <!-- Video Player (Hidden by default) -->
-        <div id="video-player-container" style="display: none;">
-            <video id="videoPlayer" controls style="width: 100%;"></video>
-            <div class="video-meta">
-                <h3 id="videoTitle"></h3>
-                <p id="videoMeta"></p>
+    <div class="cta-section">
+        <div class="container">
+            <h2>स्वादिष्ट फ़ास्ट फ़ूड और ताज़ी केक <br> आपके घर तक!</h2>
+            <p>**₹100 से ज़्यादा के ऑर्डर पर मुफ्त डिलीवरी!**</p>
+            <a href="#menu" class="cta-button">अभी मेनू देखें</a>
+        </div>
+    </div>
+
+    <div id="menu" class="menu-section">
+        <div class="container">
+            <h2>हमारा मेनू</h2>
+            <p id="menu-loading-message" style="display: none;">मेनू लोड हो रहा है...</p>
+            <div class="menu-grid" id="menu-grid">
+                <!-- Menu items will be loaded here by JavaScript -->
             </div>
         </div>
+    </div>
 
-        <!-- Home Page Content -->
-        <h2>New Content</h2>
-        <div class="posters">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Tu3q2k76u6tlJRZm-4LdNj8jqouba7G19w&usqp=CAU" alt="New Movie">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcoS1snoVt51lSVDtRYkJ17e7vQx6wn495pUeGhK9lycEKbDJIlAbqkJ4&s=10" alt="New Highlight">
-        </div>
-    </main>
+    <div id="order-summary" class="order-summary-section">
+        <div class="container">
+            <h2>आपका ऑर्डर</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be displayed here -->
+                <li id="empty-cart-message">आपका कार्ट खाली है। मेनू से आइटम जोड़ें।</li>
+            </ul>
+            <div id="cart-total-container">
+                कुल: <span id="cart-total">₹0</span>
+                <p id="free-delivery-message"></p>
+            </div>
 
-    <!-- Other Pages (No Video Player) -->
-    <main id="sports" class="page">
-        <div class="video-list">
-            <div class="video-item" onclick="playVideo('sports-video.m3u8', 'HLS', 'Live Match', '50K views • 1 hour ago')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROo7G28jtn0jHrMdNmrUldE_dbpdwQvR1h92H2BGSdd0GGpTjRjNzbzNU&s=10" alt="Sports">
-                <p>Live Match - 50K views • 1 hour ago</p>
+            <div class="customer-details-form">
+                <label for="customerName">आपका नाम:</label>
+                <input type="text" id="customerName" placeholder="अपना पूरा नाम दर्ज करें" required>
+
+                <label for="customerAddress">आपका पता:</label>
+                <input type="text" id="customerAddress" placeholder="पूरा डिलीवरी पता दर्ज करें" required>
+
+                <button id="orderWhatsappButton" class="order-whatsapp-button" disabled>WhatsApp पर ऑर्डर करें</button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <main id="highlights" class="page">
-        <div class="video-list">
-            <div class="video-item" onclick="playVideo('highlight.mp4', 'Shaka', 'Match Highlights', '30K views • 2 days ago')">
-                <img src="highlight-thumb.jpg" alt="Highlight">
-                <p>Match Highlights - 30K views • 2 days ago</p>
+    <div class="contact-section">
+        <div class="container">
+            <h2>हमसे संपर्क करें</h2>
+            <div class="contact-details">
+                <p><strong>पता:</strong> मानक्सर, पुराना पोस्ट ऑफिस, सांवरिया रोड</p>
+                <p><strong>फ़ोन:</strong>
+                    <a href="tel:9782353918">बाइंडर 9782353918</a> |
+                    <a href="tel:8239008198">कुलदीप 8239008198</a>
+                </p>
             </div>
         </div>
-    </main>
+    </div>
 
-    <main id="movies" class="page">
-        <div class="video-list">
-            <div class="video-item" onclick="playVideo('movie.mp4', 'Shaka', 'Movie Title', '1M views • 5 days ago')">
-                <img src="movie-thumb.jpg" alt="Movie">
-                <p>Movie Title - 1M views • 5 days ago</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer Navigation -->
     <footer>
-        <div class="nav-icon" onclick="showPage('home')">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home">
-        </div>
-        <div class="nav-icon" onclick="showPage('sports')">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/soccer-ball.png" alt="Sports">
-        </div>
-        <div class="nav-icon" onclick="showPage('highlights')">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/clapperboard.png" alt="Highlights">
-        </div>
-        <div class="nav-icon" onclick="showPage('movies')">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/film-reel.png" alt="Movies">
+        <div class="container">
+            <p>&copy; 2025 ब्रदर्स फ़ास्ट फ़ूड एंड केक बेकरी। सभी अधिकार सुरक्षित।</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Define menu items directly in JavaScript (fetched from menu.json in previous context)
+        const menuItems = [
+            { id: 'burger', name: 'बर्गर', price: 50, imageUrl: 'https://placehold.co/400x200/FDD835/121212?text=Burger' },
+            { id: 'pizza', name: 'पिज्जा', price: 120, imageUrl: 'https://placehold.co/400x200/C62828/FFFFFF?text=Pizza' },
+            { id: 'chocolate-cake', name: 'चॉकलेट केक (1kg)', price: 400, imageUrl: 'https://placehold.co/400x200/FDD835/121212?text=Chocolate+Cake' },
+            { id: 'sandwich', name: 'सैंडविच', price: 60, imageUrl: 'https://placehold.co/400x200/C62828/FFFFFF?text=Sandwich' },
+            { id: 'french-fries', name: 'फ्रेंच फ्राइज़', price: 80, imageUrl: 'https://placehold.co/400x200/FDD835/121212?text=French+Fries' },
+            { id: 'cold-coffee', name: 'कोल्ड कॉफ़ी', price: 90, imageUrl: 'https://placehold.co/400x200/C62828/FFFFFF?text=Cold+Coffee' },
+            { id: 'veg-roll', name: 'वेज रोल', price: 70, imageUrl: 'https://placehold.co/400x200/FDD835/121212?text=Veg+Roll' },
+            { id: 'chicken-nuggets', name: 'चिकन नगेट्स (6 पीस)', price: 150, imageUrl: 'https://placehold.co/400x200/C62828/FFFFFF?text=Chicken+Nuggets' }
+            // Add more menu items here directly in this array
+        ];
+
+        // Cart array to store selected items
+        let cart = [];
+
+        // DOM Elements
+        const menuGrid = document.getElementById('menu-grid');
+        const menuLoadingMessage = document.getElementById('menu-loading-message');
+        const cartItemsList = document.getElementById('cart-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const customerNameInput = document.getElementById('customerName');
+        const customerAddressInput = document.getElementById('customerAddress');
+        const orderWhatsappButton = document.getElementById('orderWhatsappButton');
+        const freeDeliveryMessage = document.getElementById('free-delivery-message');
+
+        // Function to render menu items dynamically
+        function renderMenuItems() {
+            menuGrid.innerHTML = ''; // Clear existing items
+            menuItems.forEach(item => {
+                const menuItemDiv = document.createElement('div');
+                menuItemDiv.classList.add('menu-item');
+                menuItemDiv.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.name}">
+                    <h3>${item.name}</h3>
+                    <p class="price">₹${item.price}</p>
+                    <button class="add-to-cart-button" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" data-image="${item.imageUrl}">कार्ट में जोड़ें</button>
+                `;
+                menuGrid.appendChild(menuItemDiv);
+            });
+
+            // Add event listeners to "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const itemId = event.target.dataset.id;
+                    const itemName = event.target.dataset.name;
+                    const itemPrice = parseFloat(event.target.dataset.price);
+                    const itemImage = event.target.dataset.image;
+                    addItemToCart({ id: itemId, name: itemName, price: itemPrice, imageUrl: itemImage });
+                });
+            });
+        }
+
+        // Function to add an item to the cart
+        function addItemToCart(itemToAdd) {
+            const existingItem = cart.find(item => item.id === itemToAdd.id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...itemToAdd, quantity: 1 });
+            }
+            updateCartDisplay();
+        }
+
+        // Function to update item quantity in cart
+        function updateCartItemQuantity(itemId, change) {
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1); // Remove if quantity is 0 or less
+                }
+            }
+            updateCartDisplay();
+        }
+
+        // Function to update the cart display and total
+        function updateCartDisplay() {
+            cartItemsList.innerHTML = ''; // Clear current cart display
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                orderWhatsappButton.disabled = true; // Disable button if cart is empty
+            } else {
+                emptyCartMessage.style.display = 'none';
+                orderWhatsappButton.disabled = false; // Enable button if cart has items
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    listItem.innerHTML = `
+                        <span>${item.name} (${item.quantity}x)</span>
+                        <div class="quantity-controls">
+                            <button data-id="${item.id}" data-action="decrease">-</button>
+                            <span class="item-quantity-display">${item.quantity}</span>
+                            <button data-id="${item.id}" data-action="increase">+</button>
+                        </div>
+                        <span class="item-total">₹${itemTotal}</span>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                });
+            }
+
+            cartTotalSpan.textContent = `₹${total}`;
+
+            // Free delivery logic
+            if (total >= 100) {
+                freeDeliveryMessage.textContent = 'मुफ्त डिलीवरी!';
+                freeDeliveryMessage.style.color = 'var(--whatsapp-green)';
+            } else if (total > 0) {
+                const remaining = 100 - total;
+                freeDeliveryMessage.textContent = `₹${remaining} और ऑर्डर करें मुफ्त डिलीवरी के लिए!`;
+                freeDeliveryMessage.style.color = 'var(--primary-yellow)';
+            } else {
+                freeDeliveryMessage.textContent = '';
+            }
+
+            // Add event listeners for quantity controls
+            document.querySelectorAll('.quantity-controls button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const itemId = event.target.dataset.id;
+                    const action = event.target.dataset.action;
+                    if (action === 'increase') {
+                        updateCartItemQuantity(itemId, 1);
+                    } else if (action === 'decrease') {
+                        updateCartItemQuantity(itemId, -1);
+                    }
+                });
+            });
+        }
+
+        // Function to generate WhatsApp message and open link
+        function sendWhatsAppOrder() {
+            const customerName = customerNameInput.value.trim();
+            const customerAddress = customerAddressInput.value.trim();
+
+            if (!customerName || !customerAddress) {
+                alert('कृपया अपना नाम और पता दर्ज करें।'); // Using alert as per previous pattern, but ideally custom modal
+                return;
+            }
+
+            if (cart.length === 0) {
+                alert('कृपया ऑर्डर करने के लिए मेनू से कुछ आइटम चुनें।'); // Using alert as per previous pattern
+                return;
+            }
+
+            let orderDetails = '';
+            cart.forEach(item => {
+                orderDetails += `${item.name} (${item.quantity}x) - ₹${item.price * item.quantity}\n`;
+            });
+
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryStatus = totalAmount >= 100 ? 'मुफ्त डिलीवरी' : 'डिलीवरी शुल्क लागू हो सकता है।';
+
+            const whatsappMessage = `नमस्ते, मैं Brother's Fast Food & Cake Bakery से एक ऑर्डर देना चाहता हूँ।\n\n` +
+                                    `ऑर्डर सूची:\n${orderDetails}\n` +
+                                    `कुल राशि: ₹${totalAmount}\n` +
+                                    `${deliveryStatus}\n\n` +
+                                    `मेरा नाम: ${customerName}\n` +
+                                    `मेरा पता: ${customerAddress}\n\n` +
+                                    `कृपया मेरे ऑर्डर की पुष्टि करें।`;
+
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappNumber = '9782353918'; // Binder's number
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Event listener for WhatsApp order button
+        orderWhatsappButton.addEventListener('click', sendWhatsAppOrder);
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenuItems(); // Render menu directly as it's now in JS
+            updateCartDisplay(); // Initialize cart display
+        });
+    </script>
 </body>
 </html>
