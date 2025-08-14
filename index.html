@@ -23,7 +23,8 @@
             background-attachment: fixed; /* Parallax effect */
         }
         .gradient-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+            /* Increased opacity for a darker effect */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85));
         }
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
@@ -176,6 +177,10 @@
             <p id="empty-cart-message" class="text-gray-400 text-center py-4">Your cart is empty.</p>
         </div>
         <div class="mt-6 pt-4 border-t border-gray-700">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-lg font-semibold">Delivery Fee:</span>
+                <span id="delivery-fee" class="text-lg font-bold text-amber-400">₹0.00</span>
+            </div>
             <div class="flex justify-between items-center mb-4">
                 <span class="text-xl font-semibold">Total:</span>
                 <span id="cart-total" class="text-2xl font-bold text-amber-400">₹0.00</span>
@@ -237,6 +242,7 @@
         const cartSidebar = document.getElementById('cart-sidebar');
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalSpan = document.getElementById('cart-total');
+        const deliveryFeeSpan = document.getElementById('delivery-fee'); // New element for delivery fee
         const emptyCartMessage = document.getElementById('empty-cart-message');
         const checkoutBtn = document.getElementById('checkout-btn');
         const cartToggleButton = document.getElementById('cart-toggle-btn');
@@ -254,6 +260,8 @@
 
         // Dummy business WhatsApp number (replace with actual)
         const BUSINESS_WHATSAPP_NUMBER = '+919876543210'; // Example: +91 (India)
+        const DELIVERY_FEE_THRESHOLD = 100;
+        const BASE_DELIVERY_FEE = 20;
 
         /**
          * Fetches menu items from menuList.json and renders them.
@@ -360,7 +368,7 @@
             }
 
             renderCart();
-            showToast('Item added to cart!'); // Optional: toast for adding to cart
+            showToast('आइटम कार्ट में जोड़ा गया!'); // Item added to cart!
         }
 
         /**
@@ -368,7 +376,7 @@
          */
         function renderCart() {
             cartItemsContainer.innerHTML = '';
-            let total = 0;
+            let subtotal = 0; // Renamed to subtotal to differentiate from final total with delivery fee
             let totalItemsInCart = 0;
             const cartItemIds = Object.keys(cart);
 
@@ -381,7 +389,7 @@
                 cartItemIds.forEach(itemId => {
                     const item = cart[itemId];
                     const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
+                    subtotal += itemTotal;
                     totalItemsInCart += item.quantity;
 
                     const cartItemDiv = document.createElement('div');
@@ -402,7 +410,18 @@
                 });
             }
 
-            cartTotalSpan.textContent = `₹${total.toFixed(2)}`;
+            let deliveryFee = 0;
+            if (subtotal < DELIVERY_FEE_THRESHOLD && subtotal > 0) { // Only apply fee if cart is not empty and below threshold
+                deliveryFee = BASE_DELIVERY_FEE;
+                deliveryFeeSpan.innerHTML = `₹${BASE_DELIVERY_FEE.toFixed(2)}`;
+            } else if (subtotal >= DELIVERY_FEE_THRESHOLD) {
+                deliveryFeeSpan.innerHTML = `<del class="text-gray-500 mr-1">₹${BASE_DELIVERY_FEE.toFixed(2)}</del> ₹0.00/-`;
+            } else {
+                deliveryFeeSpan.textContent = `₹0.00`; // Cart is empty
+            }
+
+            const finalTotal = subtotal + deliveryFee;
+            cartTotalSpan.textContent = `₹${finalTotal.toFixed(2)}`;
             cartCountSpan.textContent = totalItemsInCart.toString();
 
             // Attach event listeners for remove buttons
@@ -500,33 +519,50 @@
             const mobilePattern = /^\+91[0-9]{10}$/;
 
             if (!customerName || !customerMobile || !customerAddress) {
-                showToast('Please fill in all required fields.', 'red');
+                showToast('कृपया सभी आवश्यक फ़ील्ड भरें।', 'red'); // Please fill in all required fields.
                 return;
             }
 
             if (!mobilePattern.test(customerMobile)) {
                 mobileError.classList.remove('hidden');
-                showToast('Invalid mobile number format.', 'red');
+                showToast('अवैध मोबाइल नंबर प्रारूप।', 'red'); // Invalid mobile number format.
                 return;
             }
 
-            // Build WhatsApp message
-            let whatsappMessage = `Hello Brother's Fast Food, I'd like to place an order!\n\n`;
-            whatsappMessage += `*Customer Details:*\n`;
-            whatsappMessage += `Name: ${customerName}\n`;
-            whatsappMessage += `Mobile: ${customerMobile}\n`;
-            whatsappMessage += `Address: ${customerAddress}\n\n`;
-            whatsappMessage += `*Order Details:*\n`;
-
-            let orderTotal = 0;
+            // Calculate subtotal and delivery fee again for WhatsApp message accuracy
+            let subtotal = 0;
             Object.keys(cart).forEach(itemId => {
                 const item = cart[itemId];
-                whatsappMessage += `- ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}\n`;
-                orderTotal += item.price * item.quantity;
+                subtotal += item.price * item.quantity;
             });
 
-            whatsappMessage += `\n*Total Amount: ₹${orderTotal.toFixed(2)}*\n\n`;
-            whatsappMessage += `Thank you!`;
+            let deliveryFee = 0;
+            if (subtotal < DELIVERY_FEE_THRESHOLD && subtotal > 0) {
+                deliveryFee = BASE_DELIVERY_FEE;
+            }
+
+            const finalTotal = subtotal + deliveryFee;
+
+            // Build WhatsApp message
+            let whatsappMessage = `नमस्ते Brother's Fast Food, मैं एक ऑर्डर देना चाहूंगा!\n\n`; // Hello Brother's Fast Food, I'd like to place an order!
+            whatsappMessage += `*ग्राहक विवरण:*\n`; // Customer Details:
+            whatsappMessage += `नाम: ${customerName}\n`; // Name:
+            whatsappMessage += `मोबाइल: ${customerMobile}\n`; // Mobile:
+            whatsappMessage += `पता: ${customerAddress}\n\n`; // Address:
+            whatsappMessage += `*ऑर्डर विवरण:*\n`; // Order Details:
+
+            Object.keys(cart).forEach(itemId => {
+                const item = cart[itemId];
+                whatsappMessage += `- ${item.name} (मात्रा: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}\n`; // - Item (Qty: X) - Price
+            });
+
+            whatsappMessage += `\n*कुल राशि (उपयोगकर्ता भुगतान करेगा): ₹${finalTotal.toFixed(2)}*\n`; // Total Amount (User will pay):
+            if (deliveryFee === 0 && subtotal >= DELIVERY_FEE_THRESHOLD) {
+                whatsappMessage += `(डिलीवरी शुल्क: ₹0.00/- - ₹100+ ऑर्डर पर मुफ़्त)\n`; // (Delivery Fee: ₹0.00/- - Free on ₹100+ order)
+            } else if (deliveryFee === BASE_DELIVERY_FEE) {
+                whatsappMessage += `(डिलीवरी शुल्क: ₹${BASE_DELIVERY_FEE.toFixed(2)}/-)\n`; // (Delivery Fee: ₹20.00/-)
+            }
+            whatsappMessage += `\nधन्यवाद!`; // Thank you!
 
             // Encode the message for URL
             const encodedMessage = encodeURIComponent(whatsappMessage);
@@ -537,7 +573,7 @@
 
             // Hide modal and show success toast
             hideOrderModal();
-            showToast('Order successfully initiated via WhatsApp!');
+            showToast('आपका ऑर्डर सफलतापूर्वक व्हाट्सएप के माध्यम से शुरू हो गया है!'); // Order successfully initiated via WhatsApp!
 
             // Clear cart after order is placed
             cart = {};
