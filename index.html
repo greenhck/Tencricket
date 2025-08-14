@@ -4,45 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brother's Fast Food – Taste That Brings Us Together</title>
-    <!-- Favicon -->
     <link rel="icon" href="https://placehold.co/32x32/FEE300/FF0000?text=BF" type="image/x-icon">
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Custom styles and Tailwind overrides */
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scrolling due to cart sidebar transition */
+            overflow-x: hidden;
         }
         .hero-background {
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu28pCqiNg_7_5lf6Z3KzhYNpyCJJ0aD31AA&s');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax effect */
+            background-attachment: fixed;
         }
         .gradient-overlay {
-            /* Increased opacity for a darker effect */
             background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85));
         }
-        /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #2d3748; /* Dark gray */
+            background: #2d3748;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #fbc531; /* Gold */
+            background: #fbc531;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #e2b02e; /* Darker gold */
+            background: #e2b02e;
         }
 
-        /* Cart sidebar animation */
         .cart-sidebar {
             transition: transform 0.3s ease-in-out;
         }
@@ -53,7 +47,6 @@
             transform: translateX(0);
         }
 
-        /* Modal transitions */
         .modal {
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
@@ -77,7 +70,6 @@
             opacity: 1;
         }
 
-        /* Toast notifications */
         .toast {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
             opacity: 0;
@@ -88,7 +80,6 @@
             transform: translateY(0);
         }
 
-        /* Button hover effects */
         .btn-primary, .btn-secondary {
             transition: all 0.2s ease-in-out;
         }
@@ -101,7 +92,6 @@
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
         }
 
-        /* Item load animation */
         .menu-item {
             opacity: 0;
             transform: translateY(20px);
@@ -115,17 +105,15 @@
             }
         }
     </style>
-    <!-- OpenGraph Meta Tags for Social Sharing -->
     <meta property="og:title" content="Brother's Fast Food – Taste That Brings Us Together">
     <meta property="og:description" content="Indulge in the finest fast food experience. Order your favorites from Brother's Fast Food today!">
     <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu28pCqiNg_7_5lf6Z3KzhYNpyCJJ0aD31AA&s">
-    <meta property="og:url" content="https://brothersfastfood.com"> <!-- Replace with your actual URL -->
+    <meta property="og:url" content="https://brothersfastfood.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Brother's Fast Food">
 </head>
 <body class="bg-gray-900 text-gray-100 font-inter">
 
-    <!-- Hero Section -->
     <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
         <div class="absolute inset-0 hero-background"></div>
         <div class="absolute inset-0 gradient-overlay"></div>
@@ -142,11 +130,9 @@
         </div>
     </header>
 
-    <!-- Main Content Area - Menu Section -->
     <main class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-bold text-center text-amber-400 mb-12">Our Delicious Menu</h2>
         <div id="menu-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <!-- Menu items will be loaded here by JavaScript -->
             <div class="col-span-full text-center py-10" id="loading-spinner">
                 <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-400 mx-auto"></div>
                 <p class="mt-4 text-gray-400 text-lg">Loading menu...</p>
@@ -154,12 +140,11 @@
         </div>
     </main>
 
-    <!-- Contact Us Section -->
     <section class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-xl mb-16">
-        <h2 class="text-4xl font-bold text-center text-amber-400 mb-8">हमसे संपर्क करें</h2>
+        <h2 class="text-4xl font-bold text-center text-amber-400 mb-8">Contact Us</h2>
         <div class="max-w-2xl mx-auto text-center">
             <p class="text-lg text-gray-300 mb-4">
-                <strong>पता:</strong> Manaksar, Old Post Office, Sangria Road.
+                <strong>Address:</strong> Manaksar, Old Post Office, Sangria Road.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg text-gray-300 mb-6">
                 <div>
@@ -170,12 +155,11 @@
                 </div>
             </div>
             <p class="text-md text-gray-400">
-                हमारे स्वादिष्ट फास्ट फूड का आनंद लेने के लिए आज ही आएं या हमें कॉल करें!
+                Come and enjoy our delicious fast food or give us a call today!
             </p>
         </div>
     </section>
 
-    <!-- Cart Toggle Button (Mobile) -->
     <button id="cart-toggle-btn" class="fixed bottom-4 right-4 z-50 p-4 bg-red-600 rounded-full shadow-lg lg:hidden btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -183,7 +167,6 @@
         <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-400 text-gray-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
     </button>
 
-    <!-- Cart Sidebar -->
     <div id="cart-sidebar" class="cart-sidebar fixed right-0 top-0 h-full w-full sm:w-80 bg-gray-800 z-40 shadow-xl p-6 flex flex-col hidden lg:block">
         <div class="flex justify-between items-center mb-6">
             <h3 class="text-3xl font-bold text-amber-400">Your Cart</h3>
@@ -194,7 +177,6 @@
             </button>
         </div>
         <div id="cart-items" class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
-            <!-- Cart items will be loaded here -->
             <p id="empty-cart-message" class="text-gray-400 text-center py-4">Your cart is empty.</p>
         </div>
         <div class="mt-6 pt-4 border-t border-gray-700">
@@ -212,7 +194,6 @@
         </div>
     </div>
 
-    <!-- Order Modal -->
     <div id="order-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
         <div class="modal-content bg-gray-800 rounded-lg shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300">
             <div class="flex justify-between items-center mb-6">
@@ -244,7 +225,6 @@
         </div>
     </div>
 
-    <!-- Success Toast -->
     <div id="success-toast" class="toast fixed bottom-4 left-1/2 -translate-x-1/2 bg-green-600 text-white py-3 px-6 rounded-md shadow-lg flex items-center space-x-2 z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -252,26 +232,20 @@
         <span>Order successfully initiated via WhatsApp!</span>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm">
         <div class="container mx-auto px-4">
             <p>&copy; 2024 Brother's Fast Food. All rights reserved.</p>
             <p class="mt-2 flex items-center justify-center">
                 website hosted & designed by
                 <a href="https://t.me/lovelyakash41" target="_blank" class="ml-2 text-blue-400 hover:text-blue-300 flex items-center">
-                    <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M18.3 5.4c-.6-.2-1.2-.3-1.8-.3-.6 0-1.2.1-1.8.3-.6.2-1.2.5-1.7.9-.5.4-.9.8-1.3 1.3-.4.5-.7 1-.9 1.6-.2.6-.3 1.3-.3 2v.2c0 .7.1 1.4.3 2 .2.6.5 1.2.9 1.7.4.5.8.9 1.3 1.3.5.4 1.1.7 1.7.9.6.2 1.2.3 1.8.3.6 0 1.2-.1 1.8-.3.6-.2 1.2-.5 1.7-.9.5-.4.9-.8 1.3-1.3.4-.5.7-1 .9-1.6.2-.6.3-1.3.3-2v-.2c0-.7-.1-1.4-.3-2-.2-.6-.5-1.2-.9-1.7-.4-.5-.8-.9-1.3-1.3-.5-.4-1.1-.7-1.7-.9zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm3.8 8.8c.2.2.3.4.3.7s-.1.5-.3.7L13 13.5c-.2.2-.4.3-.7.3s-.5-.1-.7-.3L9.2 11c-.2-.2-.3-.4-.3-.7s.1-.5.3-.7L11.6 8c.2-.2.4-.3.7-.3s.5.1.7.3l2.4 2.4z"/>
-                    </svg>
-                    @lovelyakash41
+                    <i class="fa-brands fa-telegram text-xl mr-1"></i> @lovelyakash41
                 </a>
             </p>
         </div>
     </footer>
 
     <script>
-        // Store menu items globally once fetched
         let menuItems = [];
-        // Store cart items as an object for easy access by item ID
         let cart = {};
 
         const menuGrid = document.getElementById('menu-items-grid');
@@ -279,7 +253,7 @@
         const cartSidebar = document.getElementById('cart-sidebar');
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalSpan = document.getElementById('cart-total');
-        const deliveryFeeSpan = document.getElementById('delivery-fee'); // New element for delivery fee
+        const deliveryFeeSpan = document.getElementById('delivery-fee');
         const emptyCartMessage = document.getElementById('empty-cart-message');
         const checkoutBtn = document.getElementById('checkout-btn');
         const cartToggleButton = document.getElementById('cart-toggle-btn');
@@ -295,19 +269,14 @@
         const successToast = document.getElementById('success-toast');
         const viewMenuBtn = document.getElementById('view-menu-btn');
 
-        // Dummy business WhatsApp number (replace with actual)
-        const BUSINESS_WHATSAPP_NUMBER = '+919876543210'; // Example: +91 (India)
+        const BUSINESS_WHATSAPP_NUMBER = '+919876543210';
         const DELIVERY_FEE_THRESHOLD = 100;
         const BASE_DELIVERY_FEE = 20;
 
-        /**
-         * Fetches menu items from menuList.json and renders them.
-         */
         async function fetchAndRenderMenu() {
             try {
-                // Show loading spinner
                 loadingSpinner.classList.remove('hidden');
-                menuGrid.innerHTML = ''; // Clear existing content
+                menuGrid.innerHTML = '';
 
                 const response = await fetch('menuList.json');
                 if (!response.ok) {
@@ -315,13 +284,12 @@
                 }
                 menuItems = await response.json();
 
-                // Hide loading spinner
                 loadingSpinner.classList.add('hidden');
 
                 menuItems.forEach((item, index) => {
                     const itemCard = document.createElement('div');
                     itemCard.className = `menu-item bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer group`;
-                    itemCard.style.animationDelay = `${index * 0.05}s`; // Stagger animation
+                    itemCard.style.animationDelay = `${index * 0.05}s`;
 
                     itemCard.innerHTML = `
                         <div class="relative overflow-hidden h-48 sm:h-56">
@@ -347,7 +315,6 @@
                     menuGrid.appendChild(itemCard);
                 });
 
-                // Attach event listeners after rendering
                 attachMenuEventListeners();
 
             } catch (error) {
@@ -357,16 +324,13 @@
             }
         }
 
-        /**
-         * Attaches event listeners for quantity buttons and add-to-cart buttons.
-         */
         function attachMenuEventListeners() {
             document.querySelectorAll('.quantity-plus-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const itemId = parseInt(e.currentTarget.dataset.itemId);
                     const quantityDisplay = document.getElementById(`quantity-${itemId}`);
                     let quantity = parseInt(quantityDisplay.textContent);
-                    quantityDisplay.textContent = Math.min(99, quantity + 1); // Max quantity 99
+                    quantityDisplay.textContent = Math.min(99, quantity + 1);
                 });
             });
 
@@ -375,7 +339,7 @@
                     const itemId = parseInt(e.currentTarget.dataset.itemId);
                     const quantityDisplay = document.getElementById(`quantity-${itemId}`);
                     let quantity = parseInt(quantityDisplay.textContent);
-                    quantityDisplay.textContent = Math.max(1, quantity - 1); // Min quantity 1
+                    quantityDisplay.textContent = Math.max(1, quantity - 1);
                 });
             });
 
@@ -389,11 +353,6 @@
             });
         }
 
-        /**
-         * Adds an item to the cart or updates its quantity.
-         * @param {number} itemId - The ID of the item to add.
-         * @param {number} quantity - The quantity to add.
-         */
         function addToCart(itemId, quantity) {
             const item = menuItems.find(i => i.id === itemId);
             if (!item) return;
@@ -405,15 +364,12 @@
             }
 
             renderCart();
-            showToast('आइटम कार्ट में जोड़ा गया!'); // Item added to cart!
+            showToast('Item added to cart!');
         }
 
-        /**
-         * Renders the cart items in the sidebar.
-         */
         function renderCart() {
             cartItemsContainer.innerHTML = '';
-            let subtotal = 0; // Renamed to subtotal to differentiate from final total with delivery fee
+            let subtotal = 0;
             let totalItemsInCart = 0;
             const cartItemIds = Object.keys(cart);
 
@@ -448,20 +404,19 @@
             }
 
             let deliveryFee = 0;
-            if (subtotal < DELIVERY_FEE_THRESHOLD && subtotal > 0) { // Only apply fee if cart is not empty and below threshold
+            if (subtotal < DELIVERY_FEE_THRESHOLD && subtotal > 0) {
                 deliveryFee = BASE_DELIVERY_FEE;
                 deliveryFeeSpan.innerHTML = `₹${BASE_DELIVERY_FEE.toFixed(2)}`;
             } else if (subtotal >= DELIVERY_FEE_THRESHOLD) {
                 deliveryFeeSpan.innerHTML = `<del class="text-gray-500 mr-1">₹${BASE_DELIVERY_FEE.toFixed(2)}</del> ₹0.00/-`;
             } else {
-                deliveryFeeSpan.textContent = `₹0.00`; // Cart is empty
+                deliveryFeeSpan.textContent = `₹0.00`;
             }
 
             const finalTotal = subtotal + deliveryFee;
             cartTotalSpan.textContent = `₹${finalTotal.toFixed(2)}`;
             cartCountSpan.textContent = totalItemsInCart.toString();
 
-            // Attach event listeners for remove buttons
             document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const itemId = parseInt(e.currentTarget.dataset.itemId);
@@ -470,78 +425,55 @@
             });
         }
 
-        /**
-         * Removes an item from the cart.
-         * @param {number} itemId - The ID of the item to remove.
-         */
         function removeFromCart(itemId) {
             delete cart[itemId];
             renderCart();
         }
 
-        /**
-         * Toggles the visibility of the cart sidebar.
-         */
         function toggleCartSidebar() {
             cartSidebar.classList.toggle('hidden');
             cartSidebar.classList.toggle('visible');
         }
 
-        /**
-         * Shows the order modal.
-         */
         function showOrderModal() {
             orderModal.classList.add('visible');
             orderModal.classList.remove('hidden');
         }
 
-        /**
-         * Hides the order modal.
-         */
         function hideOrderModal() {
             orderModal.classList.add('hidden');
             orderModal.classList.remove('visible');
-            // Clear form fields
             orderForm.reset();
             mobileError.classList.add('hidden');
         }
 
-        /**
-         * Shows a transient success toast message.
-         * @param {string} message - The message to display.
-         */
         function showToast(message) {
             successToast.querySelector('span').textContent = message;
             successToast.classList.add('show');
             setTimeout(() => {
                 successToast.classList.remove('show');
-            }, 3000); // Hide after 3 seconds
+            }, 3000);
         }
 
-        // Event Listeners
         viewMenuBtn.addEventListener('click', () => {
-            // Scroll smoothly to the menu section
             document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
         });
 
         checkoutBtn.addEventListener('click', showOrderModal);
         closeModalBtn.addEventListener('click', hideOrderModal);
-        cartToggleButton.addEventListener('click', toggleCartSidebar); // For mobile
-        closeCartBtn.addEventListener('click', toggleCartSidebar); // Close button inside cart for mobile
+        cartToggleButton.addEventListener('click', toggleCartSidebar);
+        closeCartBtn.addEventListener('click', toggleCartSidebar);
 
-        // Close modal on outside click
         orderModal.addEventListener('click', (e) => {
             if (e.target === orderModal) {
                 hideOrderModal();
             }
         });
 
-        // Mobile number input formatting and validation
         customerMobileInput.addEventListener('focus', () => {
             if (customerMobileInput.value === '') {
                 customerMobileInput.value = '+91';
             }
-            // Set cursor to the end of the current value (after +91)
             setTimeout(() => {
                 customerMobileInput.setSelectionRange(customerMobileInput.value.length, customerMobileInput.value.length);
             }, 0);
@@ -549,14 +481,12 @@
 
         customerMobileInput.addEventListener('input', (e) => {
             let value = e.target.value;
-            // Ensure it always starts with +91
             if (!value.startsWith('+91')) {
                 value = '+91' + value.replace(/^\+91/, '').replace(/[^0-9]/g, '');
             } else {
                 value = '+91' + value.substring(3).replace(/[^0-9]/g, '');
             }
 
-            // Limit to 10 digits after +91
             if (value.length > 13) {
                 value = value.substring(0, 13);
             }
@@ -566,7 +496,7 @@
             if (!mobilePattern.test(customerMobileInput.value) && customerMobileInput.value.length === 13) {
                 mobileError.classList.remove('hidden');
             } else if (customerMobileInput.value.length < 13 && customerMobileInput.value.length > 3) {
-                mobileError.classList.remove('hidden'); // Show error if not exactly 10 digits after +91
+                mobileError.classList.remove('hidden');
                 mobileError.textContent = 'Please enter exactly 10 digits after +91.';
             }
             else {
@@ -575,12 +505,10 @@
         });
 
         customerMobileInput.addEventListener('blur', () => {
-            // If the field is just '+91' or empty on blur, clear it completely
             if (customerMobileInput.value === '+91' || customerMobileInput.value === '') {
                 customerMobileInput.value = '';
-                mobileError.classList.add('hidden'); // Hide error if empty
+                mobileError.classList.add('hidden');
             }
-            // Re-validate on blur if it's not empty, to catch partial inputs
             const mobilePattern = /^\+91[0-9]{10}$/;
             if (customerMobileInput.value !== '' && !mobilePattern.test(customerMobileInput.value)) {
                 mobileError.classList.remove('hidden');
@@ -589,7 +517,6 @@
                  mobileError.classList.add('hidden');
             }
         });
-
 
         orderForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -601,18 +528,17 @@
             const mobilePattern = /^\+91[0-9]{10}$/;
 
             if (!customerName || !customerMobile || !customerAddress) {
-                showToast('कृपया सभी आवश्यक फ़ील्ड भरें।', 'red'); // Please fill in all required fields.
+                showToast('Please fill in all required fields.', 'red');
                 return;
             }
 
             if (!mobilePattern.test(customerMobile)) {
                 mobileError.classList.remove('hidden');
-                mobileError.textContent = 'अवैध मोबाइल नंबर प्रारूप। (+91XXXXXXXXXX)';
-                showToast('अवैध मोबाइल नंबर प्रारूप।', 'red'); // Invalid mobile number format.
+                mobileError.textContent = 'Invalid mobile number format. (+91XXXXXXXXXX)';
+                showToast('Invalid mobile number format.', 'red');
                 return;
             }
 
-            // Calculate subtotal and delivery fee again for WhatsApp message accuracy
             let subtotal = 0;
             Object.keys(cart).forEach(itemId => {
                 const item = cart[itemId];
@@ -626,65 +552,54 @@
 
             const finalTotal = subtotal + deliveryFee;
 
-            // Build WhatsApp message
-            let whatsappMessage = `नमस्ते Brother's Fast Food, मैं एक ऑर्डर देना चाहूंगा!\n\n`; // Hello Brother's Fast Food, I'd like to place an order!
-            whatsappMessage += `*ग्राहक विवरण:*\n`; // Customer Details:
-            whatsappMessage += `नाम: ${customerName}\n`; // Name:
-            whatsappMessage += `मोबाइल: ${customerMobile}\n`; // Mobile:
-            whatsappMessage += `पता: ${customerAddress}\n\n`; // Address:
-            whatsappMessage += `*ऑर्डर विवरण:*\n`; // Order Details:
+            let whatsappMessage = `Hello Brother's Fast Food, I'd like to place an order!\n\n`;
+            whatsappMessage += `*Customer Details:*\n`;
+            whatsappMessage += `Name: ${customerName}\n`;
+            whatsappMessage += `Mobile: ${customerMobile}\n`;
+            whatsappMessage += `Address: ${customerAddress}\n\n`;
+            whatsappMessage += `*Order Details:*\n`;
 
             Object.keys(cart).forEach(itemId => {
                 const item = cart[itemId];
-                whatsappMessage += `- ${item.name} (मात्रा: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}\n`; // - Item (Qty: X) - Price
+                whatsappMessage += `- ${item.name} (Quantity: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}\n`;
             });
 
-            whatsappMessage += `\n*कुल राशि (उपयोगकर्ता भुगतान करेगा): ₹${finalTotal.toFixed(2)}*\n`; // Total Amount (User will pay):
+            whatsappMessage += `\n*Total Amount (User will pay): ₹${finalTotal.toFixed(2)}*\n`;
             if (deliveryFee === 0 && subtotal >= DELIVERY_FEE_THRESHOLD) {
-                whatsappMessage += `(डिलीवरी शुल्क: ₹0.00/- - ₹100+ ऑर्डर पर मुफ़्त)\n`; // (Delivery Fee: ₹0.00/- - Free on ₹100+ order)
+                whatsappMessage += `(Delivery Fee: ₹0.00/- - Free on ₹100+ order)\n`;
             } else if (deliveryFee === BASE_DELIVERY_FEE) {
-                whatsappMessage += `(डिलीवरी शुल्क: ₹${BASE_DELIVERY_FEE.toFixed(2)}/-)\n`; // (Delivery Fee: ₹20.00/-)
+                whatsappMessage += `(Delivery Fee: ₹${BASE_DELIVERY_FEE.toFixed(2)}/-)\n`;
             }
-            whatsappMessage += `\nधन्यवाद!`; // Thank you!
+            whatsappMessage += `\nThank you!`;
 
-            // Encode the message for URL
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const whatsappUrl = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-            // Open WhatsApp in a new tab
             window.open(whatsappUrl, '_blank');
 
-            // Hide modal and show success toast
             hideOrderModal();
-            showToast('आपका ऑर्डर सफलतापूर्वक व्हाट्सएप के माध्यम से शुरू हो गया है!'); // Order successfully initiated via WhatsApp!
+            showToast('Your order has been successfully initiated via WhatsApp!');
 
-            // Clear cart after order is placed
             cart = {};
             renderCart();
         });
 
-
-        // Initial load
         document.addEventListener('DOMContentLoaded', () => {
             fetchAndRenderMenu();
-            renderCart(); // Render empty cart initially
+            renderCart();
         });
 
-        // Toggle cart sidebar visibility based on screen size (for larger screens)
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
+            if (window.innerWidth >= 1024) {
                 cartSidebar.classList.remove('hidden');
                 cartSidebar.classList.add('visible');
             } else {
-                // Keep the hidden/visible class as is on resize if it was set by mobile toggle
                 if (!cartSidebar.classList.contains('visible')) {
                     cartSidebar.classList.add('hidden');
                 }
             }
         });
 
-        // Ensure cart is visible on large screens by default, and hidden on small screens
-        // This runs once on load and on resize
         function setInitialCartVisibility() {
             if (window.innerWidth >= 1024) {
                 cartSidebar.classList.remove('hidden');
@@ -694,8 +609,7 @@
                 cartSidebar.classList.remove('visible');
             }
         }
-        setInitialCartVisibility(); // Call on initial load
-
+        setInitialCartVisibility();
     </script>
 </body>
 </html>
