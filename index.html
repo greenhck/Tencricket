@@ -74,6 +74,7 @@
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
             opacity: 0;
             transform: translateY(20px);
+            left: 16px; /* Moved to left side */
         }
         .toast.show {
             opacity: 1;
@@ -82,6 +83,7 @@
 
         .btn-primary, .btn-secondary {
             transition: all 0.2s ease-in-out;
+            user-select: none; /* Prevent text selection */
         }
         .btn-primary:hover {
             transform: translateY(-2px);
@@ -112,54 +114,89 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Brother's Fast Food">
 </head>
-<body class="bg-gray-900 text-gray-100 font-inter">
+<body class="bg-gray-900 text-gray-100 font-inter min-h-screen flex flex-col">
 
-    <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-        <div class="absolute inset-0 hero-background"></div>
-        <div class="absolute inset-0 gradient-overlay"></div>
-        <div class="relative z-10 p-6 max-w-4xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight drop-shadow-lg animate-fade-in-down">
-                Brother’s Fast Food – <span class="text-amber-400">Taste That Brings Us Together</span>
-            </h1>
-            <p class="mt-4 text-lg sm:text-xl text-gray-200 drop-shadow-md animate-fade-in-up">
-                Quick, delicious, and made with love. Your ultimate fast food destination.
-            </p>
-            <button id="view-menu-btn" class="mt-8 px-8 py-3 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 btn-primary">
-                Explore Our Menu
-            </button>
+    <div id="page-wrapper" class="flex-grow flex flex-col lg:flex-row">
+        <!-- Main Content Area -->
+        <div class="flex-grow">
+            <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+                <div class="absolute inset-0 hero-background"></div>
+                <div class="absolute inset-0 gradient-overlay"></div>
+                <div class="relative z-10 p-6 max-w-4xl mx-auto">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight drop-shadow-lg animate-fade-in-down">
+                        Brother’s Fast Food – <span class="text-amber-400">Taste That Brings Us Together</span>
+                    </h1>
+                    <p class="mt-4 text-lg sm:text-xl text-gray-200 drop-shadow-md animate-fade-in-up">
+                        Quick, delicious, and made with love. Your ultimate fast food destination.
+                    </p>
+                    <button id="view-menu-btn" class="mt-8 px-8 py-3 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 btn-primary">
+                        Explore Our Menu
+                    </button>
+                </div>
+            </header>
+
+            <main class="container mx-auto px-4 py-16">
+                <h2 class="text-4xl font-bold text-center text-amber-400 mb-12">Our Delicious Menu</h2>
+                <div id="menu-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <div class="col-span-full text-center py-10" id="loading-spinner">
+                        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-400 mx-auto"></div>
+                        <p class="mt-4 text-gray-400 text-lg">Loading menu...</p>
+                    </div>
+                </div>
+            </main>
+
+            <section class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-xl mb-16">
+                <h2 class="text-4xl font-bold text-center text-amber-400 mb-8">Contact Us</h2>
+                <div class="max-w-2xl mx-auto text-center">
+                    <p class="text-lg text-gray-300 mb-4">
+                        <strong>Address:</strong> Manaksar, Old Post Office, Sangria Road.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg text-gray-300 mb-6">
+                        <div>
+                            <strong>Binder:</strong> <a href="tel:+91978235467" class="text-amber-400 hover:underline">978235467</a>
+                        </div>
+                        <div>
+                            <strong>Deep:</strong> <a href="tel:+919008767777" class="text-amber-400 hover:underline">9008767777</a>
+                        </div>
+                    </div>
+                    <p class="text-md text-gray-400">
+                        Come and enjoy our delicious fast food or give us a call today!
+                    </p>
+                </div>
+            </section>
         </div>
-    </header>
 
-    <main class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center text-amber-400 mb-12">Our Delicious Menu</h2>
-        <div id="menu-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <div class="col-span-full text-center py-10" id="loading-spinner">
-                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-400 mx-auto"></div>
-                <p class="mt-4 text-gray-400 text-lg">Loading menu...</p>
+        <!-- Cart Sidebar -->
+        <!-- On larger screens (lg), it becomes static and takes its width within the flex row -->
+        <div id="cart-sidebar" class="cart-sidebar fixed right-0 top-0 h-full w-full sm:w-80 bg-gray-800 z-40 shadow-xl p-6 flex flex-col hidden lg:static lg:block lg:flex-shrink-0 lg:ml-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-bold text-amber-400">Your Cart</h3>
+                <button id="close-cart-btn" class="lg:hidden text-gray-400 hover:text-white transition duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="cart-items" class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                <p id="empty-cart-message" class="text-gray-400 text-center py-4">Your cart is empty.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-700">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-lg font-semibold">Delivery Fee:</span>
+                    <span id="delivery-fee" class="text-lg font-bold text-amber-400">₹0.00</span>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-semibold">Total:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-amber-400">₹0.00</span>
+                </div>
+                <button id="checkout-btn" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-md shadow-lg btn-secondary" disabled>
+                    Order Now
+                </button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <section class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-xl mb-16">
-        <h2 class="text-4xl font-bold text-center text-amber-400 mb-8">Contact Us</h2>
-        <div class="max-w-2xl mx-auto text-center">
-            <p class="text-lg text-gray-300 mb-4">
-                <strong>Address:</strong> Manaksar, Old Post Office, Sangria Road.
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg text-gray-300 mb-6">
-                <div>
-                    <strong>Binder:</strong> <a href="tel:+91978235467" class="text-amber-400 hover:underline">978235467</a>
-                </div>
-                <div>
-                    <strong>Kuldeep:</strong> <a href="tel:+918239008198" class="text-amber-400 hover:underline">9008767777</a>
-                </div>
-            </div>
-            <p class="text-md text-gray-400">
-                Come and enjoy our delicious fast food or give us a call today!
-            </p>
-        </div>
-    </section>
-
+    <!-- Cart Toggle Button (Mobile Only) -->
     <button id="cart-toggle-btn" class="fixed bottom-4 right-4 z-50 p-4 bg-red-600 rounded-full shadow-lg lg:hidden btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -167,33 +204,7 @@
         <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-400 text-gray-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
     </button>
 
-    <div id="cart-sidebar" class="cart-sidebar fixed right-0 top-0 h-full w-full sm:w-80 bg-gray-800 z-40 shadow-xl p-6 flex flex-col hidden lg:block">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-3xl font-bold text-amber-400">Your Cart</h3>
-            <button id="close-cart-btn" class="lg:hidden text-gray-400 hover:text-white transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div id="cart-items" class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
-            <p id="empty-cart-message" class="text-gray-400 text-center py-4">Your cart is empty.</p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-gray-700">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-semibold">Delivery Fee:</span>
-                <span id="delivery-fee" class="text-lg font-bold text-amber-400">₹0.00</span>
-            </div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-xl font-semibold">Total:</span>
-                <span id="cart-total" class="text-2xl font-bold text-amber-400">₹0.00</span>
-            </div>
-            <button id="checkout-btn" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-md shadow-lg btn-secondary" disabled>
-                Order Now
-            </button>
-        </div>
-    </div>
-
+    <!-- Order Modal -->
     <div id="order-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
         <div class="modal-content bg-gray-800 rounded-lg shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300">
             <div class="flex justify-between items-center mb-6">
@@ -225,7 +236,8 @@
         </div>
     </div>
 
-    <div id="success-toast" class="toast fixed bottom-4 left-1/2 -translate-x-1/2 bg-green-600 text-white py-3 px-6 rounded-md shadow-lg flex items-center space-x-2 z-50">
+    <!-- Success Toast -->
+    <div id="success-toast" class="toast fixed bottom-4 z-50 bg-green-600 text-white py-3 px-6 rounded-md shadow-lg flex items-center space-x-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
@@ -269,7 +281,7 @@
         const successToast = document.getElementById('success-toast');
         const viewMenuBtn = document.getElementById('view-menu-btn');
 
-        const BUSINESS_WHATSAPP_NUMBER = '+919782353918';
+        const BUSINESS_WHATSAPP_NUMBER = '+919876543210';
         const DELIVERY_FEE_THRESHOLD = 100;
         const BASE_DELIVERY_FEE = 20;
 
@@ -367,6 +379,16 @@
             showToast('Item added to cart!');
         }
 
+        function updateCartQuantity(itemId, delta) {
+            if (cart[itemId]) {
+                cart[itemId].quantity += delta;
+                if (cart[itemId].quantity <= 0) {
+                    delete cart[itemId];
+                }
+            }
+            renderCart();
+        }
+
         function renderCart() {
             cartItemsContainer.innerHTML = '';
             let subtotal = 0;
@@ -390,7 +412,12 @@
                     cartItemDiv.innerHTML = `
                         <div class="flex-grow">
                             <p class="text-lg font-semibold text-white">${item.name}</p>
-                            <p class="text-gray-400 text-sm">₹${item.price.toFixed(2)} x ${item.quantity}</p>
+                            <p class="text-gray-400 text-sm">₹${item.price.toFixed(2)}</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <button class="cart-quantity-minus-btn bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm hover:bg-red-800 transition duration-200" data-item-id="${item.id}">-</button>
+                                <span class="text-base font-bold">${item.quantity}</span>
+                                <button class="cart-quantity-plus-btn bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm hover:bg-red-800 transition duration-200" data-item-id="${item.id}">+</button>
+                            </div>
                         </div>
                         <span class="text-lg font-bold text-amber-400 mr-4">₹${itemTotal.toFixed(2)}</span>
                         <button class="remove-from-cart-btn text-red-400 hover:text-red-500 transition duration-200" data-item-id="${item.id}">
@@ -423,6 +450,20 @@
                     removeFromCart(itemId);
                 });
             });
+
+            document.querySelectorAll('.cart-quantity-plus-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.itemId);
+                    updateCartQuantity(itemId, 1);
+                });
+            });
+
+            document.querySelectorAll('.cart-quantity-minus-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.itemId);
+                    updateCartQuantity(itemId, -1);
+                });
+            });
         }
 
         function removeFromCart(itemId) {
@@ -433,6 +474,15 @@
         function toggleCartSidebar() {
             cartSidebar.classList.toggle('hidden');
             cartSidebar.classList.toggle('visible');
+
+            // Hide the toggle button when cart is visible, show when hidden (mobile only)
+            if (window.innerWidth < 1024) { // Only for screens smaller than lg
+                if (cartSidebar.classList.contains('visible')) {
+                    cartToggleButton.classList.add('hidden');
+                } else {
+                    cartToggleButton.classList.remove('hidden');
+                }
+            }
         }
 
         function showOrderModal() {
@@ -444,6 +494,7 @@
             orderModal.classList.add('hidden');
             orderModal.classList.remove('visible');
             orderForm.reset();
+            customerMobileInput.value = '+91'; // Reset mobile to +91 after closing
             mobileError.classList.add('hidden');
         }
 
@@ -593,9 +644,13 @@
             if (window.innerWidth >= 1024) {
                 cartSidebar.classList.remove('hidden');
                 cartSidebar.classList.add('visible');
+                cartToggleButton.classList.add('hidden'); // Hide mobile toggle on desktop
             } else {
-                if (!cartSidebar.classList.contains('visible')) {
-                    cartSidebar.classList.add('hidden');
+                // On mobile, if cart is visible, hide the toggle button. If hidden, show it.
+                if (cartSidebar.classList.contains('visible')) {
+                    cartToggleButton.classList.add('hidden');
+                } else {
+                    cartToggleButton.classList.remove('hidden');
                 }
             }
         });
@@ -604,9 +659,11 @@
             if (window.innerWidth >= 1024) {
                 cartSidebar.classList.remove('hidden');
                 cartSidebar.classList.add('visible');
+                cartToggleButton.classList.add('hidden'); // Hide mobile toggle on desktop
             } else {
                 cartSidebar.classList.add('hidden');
                 cartSidebar.classList.remove('visible');
+                cartToggleButton.classList.remove('hidden'); // Ensure it's visible on mobile initially
             }
         }
         setInitialCartVisibility();
