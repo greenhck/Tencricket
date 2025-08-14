@@ -1,45 +1,57 @@
 [
   {
     "id": 1,
-    "name": "Classic Burger",
-    "price": 120.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Burger"
+    "name": "Simple Samosa",
+    "price": 15.00,
+    "image": "https://c.ndtvimg.com/2023-03/0m65kep_samosa_625x300_10_March_23.jpg"
   },
   {
     "id": 2,
-    "name": "Crispy Fries",
-    "price": 70.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Fries"
+    "name": "Chhole Samosa",
+    "price": 30.00,
+    "image": "https://www.sawadindiaka.in/wp-content/uploads/2021/05/pexels-photo-4449068.jpg"
   },
   {
     "id": 3,
-    "name": "Chicken Wings (6 Pcs)",
-    "price": 180.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Wings"
+    "name": "French Fries",
+    "price": 50.00,
+    "image": "https://thecookingfoodie.com/wp-content/uploads/2020/05/IMG_4474-scaled.jpg"
   },
   {
     "id": 4,
-    "name": "Veggie Delight Pizza",
-    "price": 300.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Pizza"
+    "name": "Chaumin",
+    "price": 50.00,
+    "image": "https://c.ndtvimg.com/2018-09/12vok5q_noodles_625x300_26_September_18.jpg"
   },
   {
     "id": 5,
-    "name": "Soda",
-    "price": 50.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Soda"
+    "name": "Burger",
+    "price": 20.00,
+    "image": "https://img.taste.com.au/Cg4NbmnD/w720-h480-cfill-q80/taste/2024/03/smash-burger-recipe-196868-2.jpg"
   },
   {
     "id": 6,
-    "name": "Chocolate Shake",
-    "price": 100.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Shake"
+    "name": "Cream Burger",
+    "price": 30.00,
+    "image": "https://paprikapie.com/wp-content/uploads/2024/09/4beedcfb58e73996cc8a607afeaf3407.jpg"
   },
   {
     "id": 7,
-    "name": "Onion Rings",
-    "price": 90.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Rings"
+    "name": "Bhelpuri",
+    "price": 50.00,
+    "image": "https://www.awesomecuisine.com/wp-content/uploads/2007/11/bhel-puri.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Veg Manchurian",
+    "price": 70.00,
+    "image": "https://blessmyfoodbypayal.com/wp-content/uploads/2023/01/1674053815107.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Bhelpuri",
+    "price": 50.00,
+    "image": "https://www.awesomecuisine.com/wp-content/uploads/2007/11/bhel-puri.jpg"
   },
   {
     "id": 8,
