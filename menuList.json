@@ -48,15 +48,57 @@
     "image": "https://blessmyfoodbypayal.com/wp-content/uploads/2023/01/1674053815107.jpg"
   },
   {
-    "id": 7,
+    "id": 9,
     "name": "Paneer Chilli",
     "price": 120.00,
     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTS97eTJ9YjVInnUyXyoX8uzsiDm3dDzhp9g&usqp=CAU"
   },
   {
-    "id": 8,
-    "name": "Fish & Chips",
-    "price": 250.00,
-    "image": "https://placehold.co/400x300/FEE300/FF0000?text=Fish+%26+Chips"
+    "id": 10,
+    "name": "Chilli Patato",
+    "price": 60.00,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0FA9iXkN50PJeYIrTOwWyeg64hRxTEfH-Cg&s"
+  },
+  {
+    "id": 11,
+    "name": "Tandoori Sandwich",
+    "price": 80.00,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo6Pn2Tzet2VbDHfYzd5A30rIurgTPT-cvUw&s"
+  },
+  {
+    "id": 12,
+    "name": "Paneer Sandwich",
+    "price": 70.00,
+    "image": "https://rachnacooks.com/wp-content/uploads/2023/03/paneersandwich1.jpg"
+  },
+  {
+    "id": 13,
+    "name": "SweetCorn Sandwich",
+    "price": 60.00,
+    "image": "https://bhojmasale.com/cdn/shop/articles/quick-and-delicious-instant-sweet-corn-sandwich-recipe-461494_1024x1024.jpg?v=1739152898"
+  },
+  {
+    "id": 14,
+    "name": "Cold Sandwich",
+    "price": 50.00,
+    "image": "https://4.imimg.com/data4/VG/IG/ANDROID-51702935/product-500x500.jpeg"
+  },
+  {
+    "id": 15,
+    "name": "Tea (1 cup)",
+    "price": 10.00,
+    "image": "https://food-dee-dum.com/wp-content/uploads/2014/11/Food-Dee-Dum-Masala-Chai-Recipe-11.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Hot Coffee",
+    "price": 20.00,
+    "image": "https://pizzacircle.in/wp-content/uploads/2023/04/coffee-story_647_061616085217.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Cold Coffee",
+    "price": 40.00,
+    "image": "https://www.vegrecipesofindia.com/wp-content/uploads/2021/04/cold-coffee-recipe-2-500x500.jpg"
   }
 ]
